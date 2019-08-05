@@ -19,6 +19,10 @@ app.use(express.static('public'));
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log('MongoDB connected');
+});
 
 const itemsSchema = {
   name: String
